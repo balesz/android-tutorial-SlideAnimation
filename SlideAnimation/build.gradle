@@ -1,0 +1,54 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.5.+'
+    }
+}
+
+apply plugin: 'android'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.google.guava:guava:14.0.+'
+    compile 'com.android.support:support-v4:18.0.+'
+    compile 'com.android.support:appcompat-v7:18.0.+'
+    //compile 'com.android.support:gridlayout-v7:18.0.+'
+    //compile 'com.android.support:support-v13:18.0.+'
+    //compile 'com.google.android.gms:play-services:3.2.25'
+    compile 'com.nineoldandroids:library:2.4.0'
+}
+
+android {
+    compileSdkVersion 18
+    buildToolsVersion "18.0.1"
+
+    defaultConfig {
+        versionCode 1
+        versionName '1.0'
+        minSdkVersion 10
+        targetSdkVersion 18
+        packageName 'net.solutinno.tutorial.slide'
+    }
+
+    signingConfigs {
+        release
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+        debug {
+            packageNameSuffix '.debug'
+            versionNameSuffix '-debug'
+        }
+    }
+}
+
+apply from: 'signing.gradle'
+initSigning(android, android.defaultConfig.packageName)
